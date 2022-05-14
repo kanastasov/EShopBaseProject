@@ -19,15 +19,23 @@ public class HomeController {
 
 
 
-    /**
-     * load the products from the file
-     * @return
-     */
+  
     @GetMapping("/api/products")
     public String products()throws IOException {
         File resource = new ClassPathResource("products.js").getFile();
 		String text = new String(Files.readAllBytes(resource.toPath()));
         return text;
+        
     }
 
+
+
+    @GetMapping("/api/products/:id")
+    public String product()throws IOException {
+        File resource = new ClassPathResource("products.js").getFile();
+		String text = new String(Files.readAllBytes(resource.toPath()));
+        
+
+        return text;
+    }
 }
