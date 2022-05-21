@@ -12,18 +12,14 @@ import org.springframework.beans.factory.annotation.Required;
 @Table(name = "user_model")
 public class UserModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name;
-    private String email;
-    private String password;
-    private Boolean isAdmin = false;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String name;
+	private String email;
+	private String password;
+	private Boolean isAdmin = false;
 
-
-    
-    
-    
 	public UserModel(Integer id, String name, String email, String password, Boolean isAdmin) {
 		super();
 		this.id = id;
@@ -32,35 +28,37 @@ public class UserModel {
 		this.password = password;
 		this.isAdmin = isAdmin;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
+
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-    
-    
-    
-    
 
-    
-    
 }
