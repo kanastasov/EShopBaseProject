@@ -8,8 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "order_model")
+//@Entity
+//@Table(name = "order_model")
 public class OrderModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
