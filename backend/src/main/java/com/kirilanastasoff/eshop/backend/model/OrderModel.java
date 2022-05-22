@@ -24,22 +24,24 @@ public class OrderModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@JsonManagedReference
-	@OneToMany(mappedBy = "productModel", fetch = FetchType.EAGER, orphanRemoval = true, cascade = { CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REMOVE })
-	private List<UserModel> productModel = new ArrayList<>();
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "orderModel", fetch = FetchType.EAGER, orphanRemoval = true, cascade = { CascadeType.MERGE,
+//			CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REMOVE })
+//	private List<UserModel> productModel = new ArrayList<>();
 
 	@Column(name = "order_items")
 	private OrderItems[] orderItems;
 
-	@Column(name = "shipping_address")
-	private ShippingAddress shippingAddress;
+//	@Column(name = "shipping_address")
+//	private ShippingAddress shippingAddress;
 
 	@Column(name = "payment_method")
 	private String paymentMethod;
 
-	@Column(name = "payment_result")
-	private PaymentResult paymentResult;
+	
+	
+//	@Column(name = "payment_result")
+//	private PaymentResult paymentResult;
 
 	@Column(name = "tax_price")
 	private double taxPrice = 0;

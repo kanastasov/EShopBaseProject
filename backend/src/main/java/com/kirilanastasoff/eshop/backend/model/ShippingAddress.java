@@ -1,9 +1,30 @@
 package com.kirilanastasoff.eshop.backend.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "shipping_address")
 public class ShippingAddress {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	@Column(name = "address")
 	private String address;
+
+	@Column(name = "city")
 	private String city;
+
+	@Column(name = "postal_code")
 	private String postalCode;
+
+	@Column(name = "country")
 	private String country;
 
 	public ShippingAddress(String address, String city, String postalCode, String country) {
