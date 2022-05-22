@@ -10,8 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -23,10 +28,17 @@ public class ProductModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonManagedReference
-	@OneToMany(mappedBy = "productModel", fetch = FetchType.EAGER, orphanRemoval = true, cascade = { CascadeType.MERGE,
+	@OneToMany(mappedBy = "productModel", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.PERSIST, CascadeType.REMOVE })
+	private List<UserModel> userModel = new ArrayList<>();
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "productModelReviews", orphanRemoval = true, cascade = { CascadeType.MERGE,
 			CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REMOVE })
-	private List<UserModel> productModel = new ArrayList<>();
+	private List<Reviews> reviews = new ArrayList<>();
 
 	@Column(name = "name")
 	private String name;
@@ -54,9 +66,6 @@ public class ProductModel {
 	@Column(name = "countInStock")
 	private int countInStock;
 
-	@Column(name = "reviews")
-	private Reviews[] reviews;
-
 	public ProductModel() {
 		super();
 	}
@@ -70,9 +79,8 @@ public class ProductModel {
 	}
 
 	public ProductModel(UserModel user, String name, String image, String brand, String category, String description,
-			double rating, double numReviews, double price, int countInStock, Reviews[] reviews) {
+			double rating, double numReviews, double price, int countInStock) {
 		super();
-//		this.user = user;
 		this.name = name;
 		this.image = image;
 		this.brand = brand;
@@ -82,15 +90,24 @@ public class ProductModel {
 		this.numReviews = numReviews;
 		this.price = price;
 		this.countInStock = countInStock;
-		this.reviews = reviews;
 	}
 
-//	public UserModel getUser() {
-//		return user;
-//	}
-//	public void setUser(UserModel user) {
-//		this.user = user;
-//	}
+	public ProductModel(List<UserModel> userModel, List<Reviews> reviews, String name, String image, String brand,
+			String category, String description, double rating, double numReviews, double price, int countInStock) {
+		super();
+		this.userModel = userModel;
+		this.reviews = reviews;
+		this.name = name;
+		this.image = image;
+		this.brand = brand;
+		this.category = category;
+		this.description = description;
+		this.rating = rating;
+		this.numReviews = numReviews;
+		this.price = price;
+		this.countInStock = countInStock;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -161,14 +178,6 @@ public class ProductModel {
 
 	public void setCountInStock(int countInStock) {
 		this.countInStock = countInStock;
-	}
-
-	public Reviews[] getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(Reviews[] reviews) {
-		this.reviews = reviews;
 	}
 
 }

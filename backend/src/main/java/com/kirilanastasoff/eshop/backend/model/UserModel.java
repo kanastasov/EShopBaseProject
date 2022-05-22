@@ -36,10 +36,8 @@ public class UserModel {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private ProductModel productModel;
     
-    
-    
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "order_model_id", referencedColumnName = "id")
     private OrderModel orderModel;
     
 
