@@ -14,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -28,21 +31,33 @@ public class OrderModel {
 //	@OneToMany(mappedBy = "orderModel", fetch = FetchType.EAGER, orphanRemoval = true, cascade = { CascadeType.MERGE,
 //			CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REMOVE })
 //	private List<UserModel> productModel = new ArrayList<>();
+	
+	
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "orderModel", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.PERSIST, CascadeType.REMOVE })
+	private List<ShippingAddress> shippingAddress = new ArrayList<>();
+	
 
 	@Column(name = "order_items")
 	private OrderItems[] orderItems;
 
-//	@Column(name = "shipping_address")
-//	private ShippingAddress shippingAddress;
+
 
 	@Column(name = "payment_method")
 	private String paymentMethod;
 
 	
 	
-//	@Column(name = "payment_result")
-//	private PaymentResult paymentResult;
-
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "orderModel", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.PERSIST, CascadeType.REMOVE })
+	private List<PaymentResult> paymentResult = new ArrayList<>();
+	
+	
 	@Column(name = "tax_price")
 	private double taxPrice = 0;
 
