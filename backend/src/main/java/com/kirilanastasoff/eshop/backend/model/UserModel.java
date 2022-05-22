@@ -2,9 +2,12 @@ package com.kirilanastasoff.eshop.backend.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Required;
@@ -28,6 +31,18 @@ public class UserModel {
 
 	@Column(name = "is_admin")
 	private Boolean isAdmin = false;
+	
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private ProductModel productModel;
+    
+    
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private OrderModel orderModel;
+    
+
 
 	public UserModel(Integer id, String name, String email, String password, Boolean isAdmin) {
 		super();

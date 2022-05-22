@@ -1,11 +1,32 @@
 package com.kirilanastasoff.eshop.backend.model;
 
-public class OrderItems {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "order_items")
+public class OrderItems {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "qty")
 	private int qty;
+	
+	@Column(name = "image")
 	private String image;
+	
+	@Column(name = "price")
 	private double price;
+	
 	private ProductModel product;
 
 	public OrderItems(String name, int qty, String image, double price, ProductModel product) {
