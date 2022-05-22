@@ -1,26 +1,34 @@
 package com.kirilanastasoff.eshop.backend.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payment_result")
 public class PaymentResult {
 
-	private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	@Column(name = "status")
 	private String status;
-	private String update_time;
-	private String email_address;
 
-	public PaymentResult(Integer id, String status, String update_time, String email_address) {
+	@Column(name = "update_time")
+	private String updateTime;
+
+	@Column(name = "email_address")
+	private String emailAddress;
+
+	public PaymentResult(String status, String updateTime, String emailAddress) {
 		super();
-		this.id = id;
 		this.status = status;
-		this.update_time = update_time;
-		this.email_address = email_address;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+		this.updateTime = updateTime;
+		this.emailAddress = emailAddress;
 	}
 
 	public String getStatus() {
@@ -31,20 +39,20 @@ public class PaymentResult {
 		this.status = status;
 	}
 
-	public String getUpdate_time() {
-		return update_time;
+	public String getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setUpdate_time(String update_time) {
-		this.update_time = update_time;
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 
-	public String getEmail_address() {
-		return email_address;
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
-	public void setEmail_address(String email_address) {
-		this.email_address = email_address;
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
 }
