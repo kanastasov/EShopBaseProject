@@ -39,6 +39,8 @@ public class ProductModel {
 	@OneToMany(mappedBy = "productModelReviews", orphanRemoval = true, cascade = { CascadeType.MERGE,
 			CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<Reviews> reviews = new ArrayList<>();
+	
+	
 
 	@Column(name = "name")
 	private String name;
