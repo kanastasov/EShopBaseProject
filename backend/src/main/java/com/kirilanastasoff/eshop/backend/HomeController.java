@@ -92,6 +92,8 @@ public class HomeController {
 			_product.setBrand(product.getBrand());
 			_product.setDescription(product.getDescription());
 			_product.setCategory(product.getCategory());
+			_product.setCountInStock(product.getCountInStock());
+			
 			return new ResponseEntity<>(productModelRepository.save(_product), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
