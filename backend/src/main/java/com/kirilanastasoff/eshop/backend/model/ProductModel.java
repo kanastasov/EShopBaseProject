@@ -79,6 +79,16 @@ public class ProductModel {
 		this.category = category;
 		this.description = description;
 	}
+	
+	
+	public ProductModel(String name, String brand, String category, String description,	double rating, double numReviews, double price, int countInStock) {
+		super();
+		this.name = name;
+		this.brand = brand;
+		this.category = category;
+		this.description = description;
+	}
+
 
 	public ProductModel(UserModel user, String name, String image, String brand, String category, String description,
 			double rating, double numReviews, double price, int countInStock) {
