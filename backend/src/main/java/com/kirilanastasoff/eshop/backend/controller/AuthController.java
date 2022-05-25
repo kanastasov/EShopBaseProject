@@ -30,7 +30,7 @@ import com.kirilanastasoff.eshop.backend.request.LoginRequest;
 import com.kirilanastasoff.eshop.backend.request.SignupRequest;
 import com.kirilanastasoff.eshop.backend.response.JwtResponse;
 import com.kirilanastasoff.eshop.backend.response.MessageResponse;
-import com.kirilanastasoff.eshop.backend.security.JwtUtils;
+import com.kirilanastasoff.eshop.backend.security.jwt.JwtUtils;
 import com.kirilanastasoff.eshop.backend.service.UserDetailsImpl;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
