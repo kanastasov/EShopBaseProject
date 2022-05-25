@@ -1,4 +1,4 @@
-package com.kirilanastasoff.eshop.backend.security;
+package com.kirilanastasoff.eshop.backend.security.jwt;
 
 import java.util.Date;
 import org.slf4j.Logger;
@@ -14,9 +14,9 @@ import io.jsonwebtoken.*;
 @Component
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-	@Value("${bezkoder.app.jwtSecret}")
+	@Value("${eshopbaseproject.app.jwtSecret}")
 	private String jwtSecret;
-	@Value("${bezkoder.app.jwtExpirationMs}")
+	@Value("${eshopbaseproject.app.jwtExpirationMs}")
 	private int jwtExpirationMs;
 
 	public String generateJwtToken(Authentication authentication) {

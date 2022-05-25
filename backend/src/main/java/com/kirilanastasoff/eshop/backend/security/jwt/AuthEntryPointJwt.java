@@ -1,4 +1,4 @@
-package com.kirilanastasoff.eshop.backend.security;
+package com.kirilanastasoff.eshop.backend.security.jwt;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,15 +13,16 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
-  private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
-  @Override
-  public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
-      throws IOException, ServletException {
-    logger.error("Unauthorized error: {}", authException.getMessage());
-    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
-    
-//    https://www.bezkoder.com/spring-boot-security-postgresql-jwt-authentication/
-  }
+	private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
+
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException authException) throws IOException, ServletException {
+		logger.error("Unauthorized error: {}", authException.getMessage());
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+
+	}
 }
