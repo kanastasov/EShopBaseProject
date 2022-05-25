@@ -34,25 +34,55 @@ public class UserModel {
 	@Column(name = "password")
 	private String password;
 
+	@Column(name = "username")
+	private String username;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public ProductModel getProductModel() {
+		return productModel;
+	}
+
+	public void setProductModel(ProductModel productModel) {
+		this.productModel = productModel;
+	}
+
+	public OrderModel getOrderModel() {
+		return orderModel;
+	}
+
+	public void setOrderModel(OrderModel orderModel) {
+		this.orderModel = orderModel;
+	}
+
 	@Column(name = "is_admin")
 	private Boolean isAdmin = false;
-	
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private ProductModel productModel;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_model_id", referencedColumnName = "id")
-    private OrderModel orderModel;
-    
-    
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "user_roles", 
-				joinColumns = @JoinColumn(name = "user_id"), 
-				inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
-    
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "product_id", referencedColumnName = "id")
+	private ProductModel productModel;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "order_model_id", referencedColumnName = "id")
+	private OrderModel orderModel;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 	public UserModel(Integer id, String name, String email, String password, Boolean isAdmin) {
 		super();
@@ -93,6 +123,14 @@ public class UserModel {
 
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 }
