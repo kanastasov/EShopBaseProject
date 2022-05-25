@@ -84,6 +84,15 @@ public class UserModel {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
+	
+	
+	public UserModel(String email, String password, String username) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.username = username;
+	}
+
 	public UserModel(Integer id, String name, String email, String password, Boolean isAdmin) {
 		super();
 		this.id = id;
