@@ -87,6 +87,7 @@ public class ProductModel {
 		this.brand = brand;
 		this.category = category;
 		this.description = description;
+		
 	}
 
 
