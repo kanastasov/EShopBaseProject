@@ -9,7 +9,7 @@ import com.kirilanastasoff.eshop.backend.model.OrderModel;
 import com.kirilanastasoff.eshop.backend.model.UserModel;
 
 public interface UserModelRepository extends JpaRepository<UserModel, Long> {
-	List<OrderModel> findByEmail(String email);
+	List<UserModel> findByEmail(String email);
 
 	Optional<UserModel> findByUsername(String username);
 

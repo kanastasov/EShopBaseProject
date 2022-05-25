@@ -1,4 +1,4 @@
-package com.kirilanastasoff.eshop.backend;
+package com.kirilanastasoff.eshop.backend.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.Column;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kirilanastasoff.eshop.backend.model.ProductModel;
+import com.kirilanastasoff.eshop.backend.model.UserModel;
 import com.kirilanastasoff.eshop.backend.repository.OrderModelRepository;
 //import com.kirilanastasoff.eshop.backend.repository.OrderModelRepository;
 import com.kirilanastasoff.eshop.backend.repository.ProductModelRepository;
@@ -31,26 +33,22 @@ import com.kirilanastasoff.eshop.backend.repository.UserModelRepository;
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
-public class HomeController {
-	
+public class UsersController {
+
 	@Autowired
-	OrderModelRepository  orderModelRepository;
-	
-	@Autowired
-	ProductModelRepository productModelRepository;
-	
+	OrderModelRepository orderModelRepository;
+
 	@Autowired
 	UserModelRepository userModelRepository;
-	
-	
-	@GetMapping("/products")
-	public ResponseEntity<List<ProductModel>> getAllTutorials(@RequestParam(required = false) String name) {
+
+	@GetMapping("/users")
+	public ResponseEntity<List<UserModel>> getAllTutorials(@RequestParam(required = false) String email) {
 		try {
-			List<ProductModel> tutorials = new ArrayList<ProductModel>();
-			if (name == null)
-				productModelRepository.findAll().forEach(tutorials::add);
+			List<UserModel> tutorials = new ArrayList<UserModel>();
+			if (email == null)
+				userModelRepository.findAll().forEach(tutorials::add);
 			else
-				productModelRepository.findByName(name).forEach(tutorials::add);
+				userModelRepository.findByEmail(email).forEach(tutorials::add);
 			if (tutorials.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
@@ -59,66 +57,62 @@ public class HomeController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
-	@GetMapping("/products/{id}")
-	public ResponseEntity<ProductModel> getTutorialById(@PathVariable("id") long id) {
-		Optional<ProductModel> productData = productModelRepository.findById(id);
+
+	@GetMapping("/users/{id}")
+	public ResponseEntity<UserModel> getTutorialById(@PathVariable("id") long id) {
+		Optional<UserModel> productData = userModelRepository.findById(id);
 		if (productData.isPresent()) {
 			return new ResponseEntity<>(productData.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@PostMapping("/products")
-	public ResponseEntity<ProductModel> createProduct(@RequestBody ProductModel product) {
+
+	@PostMapping("/users")
+	public ResponseEntity<UserModel> createProduct(@RequestBody UserModel product) {
 		try {
-			ProductModel _product = productModelRepository
-					.save(new ProductModel(product.getName(), product.getBrand(),product.getCategory(), product.getDescription()));
+			UserModel _product = userModelRepository.save(
+					new UserModel(product.getName(), product.getEmail(), product.getPassword(), product.getUsername()));
 			return new ResponseEntity<>(_product, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
-	@PutMapping("/products/{id}")
-	public ResponseEntity<ProductModel> updateProduct(@PathVariable("id") long id, @RequestBody ProductModel product) {
-		Optional<ProductModel> productData = productModelRepository.findById(id);
+
+	@PutMapping("/users/{id}")
+	public ResponseEntity<UserModel> updateProduct(@PathVariable("id") long id, @RequestBody UserModel product) {
+		Optional<UserModel> productData = userModelRepository.findById(id);
 		if (productData.isPresent()) {
-			ProductModel _product = productData.get();
+			UserModel _product = productData.get();
 			_product.setName(product.getName());
-			_product.setBrand(product.getBrand());
-			_product.setDescription(product.getDescription());
-			_product.setCategory(product.getCategory());
-			_product.setCountInStock(product.getCountInStock());
-			
-			return new ResponseEntity<>(productModelRepository.save(_product), HttpStatus.OK);
+			_product.setEmail(product.getEmail());
+			_product.setPassword(product.getPassword());
+			_product.setUsername(product.getUsername());
+
+			return new ResponseEntity<>(userModelRepository.save(_product), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	@DeleteMapping("/products/{id}")
+
+	@DeleteMapping("/users/{id}")
 	public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") long id) {
 		try {
-			productModelRepository.deleteById(id);
+			userModelRepository.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	@DeleteMapping("/products")
+
+	@DeleteMapping("/users")
 	public ResponseEntity<HttpStatus> deleteAllProducts() {
 		try {
-			productModelRepository.deleteAll();
+			userModelRepository.deleteAll();
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
-
 
 }

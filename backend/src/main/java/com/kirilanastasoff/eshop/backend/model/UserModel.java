@@ -86,6 +86,17 @@ public class UserModel {
 
 	
 	
+	
+	
+	
+	public UserModel(String name, String email, String password, String username) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.username = username;
+	}
+
 	public UserModel(String email, String password, String username) {
 		super();
 		this.email = email;
@@ -93,9 +104,8 @@ public class UserModel {
 		this.username = username;
 	}
 
-	public UserModel(Integer id, String name, String email, String password, Boolean isAdmin) {
+	public UserModel( String name, String email, String password, Boolean isAdmin) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
