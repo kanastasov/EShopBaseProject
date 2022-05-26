@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,9 @@ public class UsersController {
 
 	@Autowired
 	UserModelRepository userModelRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/users")
 	public ResponseEntity<List<UserModel>> getAllTutorials(@RequestParam(required = false) String email) {
@@ -70,9 +74,10 @@ public class UsersController {
 
 	@PostMapping("/users")
 	public ResponseEntity<UserModel> createProduct(@RequestBody UserModel product) {
+//		https://www.baeldung.com/spring-security-registration-password-encoding-bcrypt use reference for front end authentication
 		try {
 			UserModel _product = userModelRepository.save(
-					new UserModel(product.getName(), product.getEmail(), product.getPassword(), product.getUsername()));
+					new UserModel(product.getName(), product.getEmail(), passwordEncoder.encode(product.getPassword()), product.getUsername()));
 			return new ResponseEntity<>(_product, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
