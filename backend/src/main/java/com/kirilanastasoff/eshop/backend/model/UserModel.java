@@ -33,12 +33,17 @@ public class UserModel {
 	@Column(name = "email")
 	private String email;
 
+	//to do hash the password
 	@Column(name = "password")
 	private String password;
 
 	@Column(name = "username")
 	private String username;
-
+	
+	
+	//to do store the token
+	@Column(name = "token")
+	private String token;
 	public long getId() {
 		return id;
 	}
@@ -89,6 +94,8 @@ public class UserModel {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
+	
+	
 	
 	
 	public UserModel() {
