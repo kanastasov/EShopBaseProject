@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Required;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "user_model")
 public class UserModel {
@@ -53,40 +55,46 @@ public class UserModel {
 		this.username = username;
 	}
 
-	public ProductModel getProductModel() {
-		return productModel;
-	}
-
-	public void setProductModel(ProductModel productModel) {
-		this.productModel = productModel;
-	}
-
-	public OrderModel getOrderModel() {
-		return orderModel;
-	}
-
-	public void setOrderModel(OrderModel orderModel) {
-		this.orderModel = orderModel;
-	}
+//	public ProductModel getProductModel() {
+//		return productModel;
+//	}
+//
+//	public void setProductModel(ProductModel productModel) {
+//		this.productModel = productModel;
+//	}
+//
+//	public OrderModel getOrderModel() {
+//		return orderModel;
+//	}
+//
+//	public void setOrderModel(OrderModel orderModel) {
+//		this.orderModel = orderModel;
+//	}
 
 	@Column(name = "is_admin")
 	private Boolean isAdmin = false;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "product_id", referencedColumnName = "id")
-	private ProductModel productModel;
+//	@JsonBackReference
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "product_id", referencedColumnName = "id")
+//	private ProductModel productModel;
+//
+//	@JsonBackReference
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "order_model_id", referencedColumnName = "id")
+//	private OrderModel orderModel;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "order_model_id", referencedColumnName = "id")
-	private OrderModel orderModel;
-
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
 	
 	
+	public UserModel() {
+		super();
 	
+	}
 	
 	
 	public UserModel(String name, String email, String password, String username) {

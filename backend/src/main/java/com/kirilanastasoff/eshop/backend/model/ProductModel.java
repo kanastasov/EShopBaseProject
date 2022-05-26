@@ -28,11 +28,11 @@ public class ProductModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonManagedReference
-	@OneToMany(mappedBy = "productModel", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.PERSIST, CascadeType.REMOVE })
-	private List<UserModel> userModel = new ArrayList<>();
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "productModel", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.DETACH,
+//			CascadeType.PERSIST, CascadeType.REMOVE })
+//	private List<UserModel> userModel = new ArrayList<>();
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonManagedReference
@@ -108,7 +108,7 @@ public class ProductModel {
 	public ProductModel(List<UserModel> userModel, List<Reviews> reviews, String name, String image, String brand,
 			String category, String description, double rating, double numReviews, double price, int countInStock) {
 		super();
-		this.userModel = userModel;
+//		this.userModel = userModel;
 		this.reviews = reviews;
 		this.name = name;
 		this.image = image;

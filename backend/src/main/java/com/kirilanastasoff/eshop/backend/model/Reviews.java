@@ -38,6 +38,8 @@ public class Reviews {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName = "id")
 	private ProductModel productModelReviews;
+//	
+	
 
 	public Reviews(String name, double rating, String comment) {
 		super();
