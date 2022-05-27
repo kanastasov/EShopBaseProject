@@ -36,17 +36,17 @@ public class UserModel {
 	@Column(name = "email")
 	private String email;
 
-	//to do hash the password
+	
 	@Column(name = "password")
 	private String password;
 
 	@Column(name = "username")
 	private String username;
-	
-	
-	//to do store the token
+
+	// to do store the token
 	@Column(name = "token")
 	private String token;
+
 	public long getId() {
 		return id;
 	}
@@ -62,10 +62,10 @@ public class UserModel {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	@Bean
 	public PasswordEncoder encoder() {
-	    return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 
 //	public ProductModel getProductModel() {
@@ -102,16 +102,11 @@ public class UserModel {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
-	
-	
-	
-	
 	public UserModel() {
 		super();
-	
+
 	}
-	
-	
+
 	public UserModel(String name, String email, String password, String username) {
 		super();
 		this.name = name;
@@ -127,7 +122,7 @@ public class UserModel {
 		this.username = username;
 	}
 
-	public UserModel( String name, String email, String password, Boolean isAdmin) {
+	public UserModel(String name, String email, String password, Boolean isAdmin) {
 		super();
 		this.name = name;
 		this.email = email;
