@@ -34,10 +34,13 @@ public class ProductModel {
 //			CascadeType.PERSIST, CascadeType.REMOVE })
 //	private List<UserModel> userModel = new ArrayList<>();
 
+	
+	
+
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonManagedReference
-	@OneToMany(mappedBy = "productModelReviews", orphanRemoval = true, cascade = { CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REMOVE })
+	@JsonManagedReference(value="reviews")
+	@OneToMany(mappedBy = "productModelReviews", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<Reviews> reviews = new ArrayList<>();
 	
 	
